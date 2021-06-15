@@ -1,0 +1,173 @@
+---
+title: ""
+output: 
+    pdf_document:
+        latex_engine: lualatex
+mainfont: georgia
+
+header-includes:
+ \usepackage{xcolor,colortbl}
+ \usepackage{tabularx}
+ \newcommand{\bcenter}{\begin{center}}
+ \newcommand{\ecenter}{\end{center}}
+ \usepackage[most]{tcolorbox}
+ \usepackage{array, tabularx, caption, boldline}
+ \usepackage{cellspace}
+ \graphicspath{{Figures/}}
+ \usepackage{grffile}
+ \usepackage{graphicx}
+ \usepackage{enumitem}
+ \usepackage{longtable}
+  \usepackage{xltabular}
+  \usepackage{fancyhdr}
+  \usepackage{ragged2e}
+ \usepackage{geometry}
+  \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ }
+ 
+
+always_allow_html: true
+params:
+  starttime: "starttime"
+  startdate: "startdate"
+  participants: "participants"
+  what: "what"
+  potentialppl: "potentialppl"
+  potentialenv: "potentialenv"
+  potentialass: "potentialass"
+  potentialrep: "potentialrep"
+  planppl: "planppl"
+  planenv: "planenv"
+  planass: "planass"
+  planrep: "planrep"
+  notppl: "notppl"
+  notenv: "notenv"
+  notass: "notass"
+  notrep: "notrep"
+  shortcons: "shortcons"
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(stringr)
+participants = str_replace_all(params$participants,"\n",", ")
+potentialppl = str_replace_all(params$potentialppl,"\n"," \\\\linebreak ")
+potentialenv = str_replace_all(params$potentialenv,"\n"," \\\\linebreak ")
+potentialass = str_replace_all(params$potentialass,"\n"," \\\\linebreak ")
+potentialrep = str_replace_all(params$potentialrep,"\n"," \\\\linebreak ")
+planppl = str_replace_all(params$planppl,"\n"," \\\\linebreak ")
+planenv = str_replace_all(params$planenv,"\n"," \\\\linebreak ")
+planass = str_replace_all(params$planass,"\n"," \\\\linebreak ")
+planrep = str_replace_all(params$planrep,"\n"," \\\\linebreak ")
+notppl = str_replace_all(params$notppl,"\n"," \\\\linebreak ")
+notenv = str_replace_all(params$notenv,"\n"," \\\\linebreak ")
+notass = str_replace_all(params$notass,"\n"," \\\\linebreak ")
+notrep = str_replace_all(params$notrep,"\n"," \\\\linebreak ")
+```
+
+
+
+\definecolor{myblue}{RGB}{0,60,113}
+\definecolor{myred}{RGB}{218, 41, 28}
+\setlist[itemize]{leftmargin=*}
+
+
+   
+
+\addtolength{\oddsidemargin}{-.3in}
+\addtolength{\evensidemargin}{-.3in}
+\addtolength{\textwidth}{-2in}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\colorbox{myred}{\parbox{18cm}{\textbf{\color{white}{\Large \hspace{1.5cm}  Norwegian Hull Club Emergency Phone: +47 22 42 88 44  }}}} }
+\renewcommand{\headrulewidth}{0pt}
+ 
+ \colorbox{myblue}{\parbox{18cm}{\textbf{\color{white}{\huge \hspace{5cm} First meeting report \hspace{3cm}   \\}}}}
+
+ \begin{flushleft}
+ 
+ \textbf {Meeting date:} `r params$startdate`\hspace{2cm}
+ \textbf {Start time:} `r params$starttime` \hspace{1.5cm}
+ \textbf \hfill {End time:} `r Sys.time()`
+ 
+ \textbf {Participants:} `r participants`
+
+
+
+ \renewcommand{\arraystretch}{1.4}
+ \begin{xltabular}{18cm} {|p{4.5cm}|>{\raggedright\arraybackslash}X |>{\raggedright\arraybackslash}X |>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+ \hline
+ \endfirsthead
+ \rowcolor{myblue} \textcolor{white} {\textbf {Time: `r params$starttime`}} & \multicolumn{4}{|c|}{\textcolor{white}{\textbf {\Large First meeting boarder}}} \\
+ \hline
+  \endhead
+ \rowcolor{myblue} \textcolor{white} {\textbf {Time: `r params$starttime`}} & \multicolumn{4}{|c|}{\textcolor{white}{\textbf {\Large First meeting boarder}}} \\
+ \hline
+ \cellcolor{myblue} \textcolor{white}{\textbf {What has happened?}} 
+ \textcolor{white}{\textit{\begin{itemize}[itemsep=0mm]
+  \item Facts
+  \item Overview 
+  \item Use of Situation Plot
+  \item People involved 
+  \item Incident overview 
+  \item What is done? \end{itemize}}} & \multicolumn{4}{|l|}{\raggedleft `r params$what`}\\
+ \hline
+ \cellcolor{myblue} \textcolor{white}{\textbf {Indicent potential / \newline Worst case?}}
+ \textcolor{white}{\textit{\begin{itemize}[itemsep=0mm] \item The potential in the current situation \end{itemize}}} & \textbf {Peolpe:}
+ 
+  `r potentialppl` & \textbf {Environment:}
+
+  `r potentialenv`& \textbf {Assets:}
+  
+  `r potentialass`& \textbf {Reputation:}
+  
+  `r potentialenv`\\
+ \hline
+ \cellcolor{myblue} \textcolor{white}{\textbf {Rough plan / Need for resources}}
+  \textcolor{white}{\textit{\begin{itemize}[itemsep=0mm]
+  \item Need of external resources based on worst case
+  \end{itemize}}}& 
+  `r planppl`& 
+  `r planenv`& 
+  `r planass`& 
+  `r planenv`\\
+ \hline
+ \cellcolor{myblue} \textcolor{white}{\textbf {Notification}} 
+  \textcolor{white}{\textit{\begin{itemize}[itemsep=0mm]
+  \item According to procedure? 
+  \item Beyond procedure?
+  \end{itemize}}}&
+  `r notppl`& 
+  `r notenv`& 
+  `r notass`& 
+  `r notenv`\\
+ \hline
+ \cellcolor{myblue} \textcolor{white}{\textbf {Any other business?}} 
+  \textcolor{white}{\textit{\begin{itemize}[itemsep=0mm]\item Shift
+  \item Daily routines 
+  \item Immediate changes
+  \item Customer support
+  \item Night-/Daytime
+  \item Weather 
+  \item Time zones
+  \item Time of year 
+  \item Internal conditions 
+  \item Other
+  \end{itemize}
+  }}& \multicolumn{4}{|l|}{`r params$shortcons`} \\
+ \hline
+ \end{xltabular}
+ \end{flushleft}
+
+
+
